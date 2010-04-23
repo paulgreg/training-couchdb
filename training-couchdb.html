@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -22,15 +21,17 @@
 <link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
 <!-- embedded styles -->
 <style type="text/css" media="all">
-body {background: transparent url(pix/logo.png) 0.25em 0.25em no-repeat; background-color: white;}
-div#header {background: transparent url(pix/logo.png) 0.25em 0.25em no-repeat; }
-.slide h1 {background:transparent; left: 6em; color: #660F14;}
+body {background: url(pix/logo.png) 0.25em 0.25em no-repeat; background-color: white;}
+div#header {background: url(pix/logo.png) 0.25em 0.25em no-repeat; }
+.slide h1 {background:transparent; left: 2em; color: #660F14;}
 div#footer {background: #E9ECEC;  color: #5A5F60;}
 ul li { list-style-type: square; padding-left: 0.25em; }
 ul li ol li { list-style-type: decimal; }
 a {color: #B81117 !important; border-bottom: 1px solid #B81117; }
 #w3, #w3 img { float: right; border: 0; }
 .javascript { color: #553333; font-size: 0.6em; white-space: pre; font-family: monospace; border: 1px solid black; margin: 0.2em; padding: 0.5em; background-color: #FFFFEE; }
+.center { text-align: center; }
+img { border: 1px solid black; }
 </style>
 <!-- S5 JS -->
 <script src="ui/default/slides.js" type="text/javascript"></script>
@@ -64,31 +65,57 @@ a {color: #B81117 !important; border-bottom: 1px solid #B81117; }
 <div class="slide">
 <h1>Apache CouchDb</h1>
 <ul>
-<li>Base NoSQL orienté document</li>
-<li>&quot;Schemaless&quot;</li>
-<li>Similaire à MongoDb</li>
-<li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
-<li>Accès par <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
-<li>Vues par Map/Reduce écrites en JavaScript (ou PHP, Ruby, Python, Erlang)</li>
-<li>Réplication facile</li>
-<li>Issue de Lotus Notes (documents, réplication, etc)</li>
+    <li>Base NoSQL orienté document</li>
+    <li>&quot;Schemaless&quot;</li>
+    <li>Similaire à MongoDb</li>
+    <li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
+    <li>Accès par <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
+    <li>Vues par Map/Reduce écrites en JavaScript (ou PHP, Ruby, Python, Erlang)</li>
+    <li>Réplication facile</li>
+    <li>Issue de Lotus Notes (documents, réplication, etc)</li>
 </ul>
+</div>
+
+<div class="slide center">
+<h1>Architecture</h1>
+<img alt="schéma" src="http://couchdb.apache.org/img/sketch.png" style="margin-top: 1em;">
 </div>
 
 <div class="slide">
 <h1>Exemples d'utilisation</h1>
 <ul>
-<li>Ubuntu : 
-    <ul>
-        <li>base par utilisateur contenant des données, préférences d'applications (fichiers, Rhythmbox, TomBoy, etc)</li>
-        <li>synchro via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
-    </ul>
-</li>
-<li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
-<li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
+    <li>Ubuntu : 
+        <ul>
+            <li>base par utilisateur contenant des données, préférences d'applications (fichiers, Rhythmbox, TomBoy, etc)</li>
+            <li>synchro via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
+        </ul>
+    </li>
+    <li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
+    <li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
 </ul>
 </div>
 
+<div class="slide">
+<h1>Données</h1>
+<ul>
+    <li>Objet JSON</li>
+</ul>
+<code class="javascript">{ id: '123456', name: 'Grégory' }</code>
+<ul>    
+    <li>Peut contenir des attachements (fichiers)</li>
+    <li>Révisions (conflits)</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Accès <acronym title="Representational State Transfer">REST</acronym></h1>
+<ul>
+    <li>Create &rarr; PUT /maBase/id</li>
+    <li>Read &rarr; GET /maBase/id</li>
+    <li>Update &rarr; POST /maBase/id</li>
+    <li>Delete &rarr; DELETE /maBase/id</li>
+</ul>
+</div>
 
 <div class="slide">
 <h1>Ressources</h1>
