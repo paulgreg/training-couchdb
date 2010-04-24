@@ -21,10 +21,11 @@
 <link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" />
 <!-- embedded styles -->
 <style type="text/css" media="all">
-body {background: url(pix/logo.png) 0.25em 0.25em no-repeat; background-color: white; }
+body {background: url(pix/logo.png) 0.25em 0.25em no-repeat; background-color: white; font-family: sans-serif; }
 div#header {background: url(pix/logo.png) 0.25em 0.25em no-repeat; }
 .slide h1 {background:transparent; left: 2.5em; color: #660F14;}
 div#footer {background: #E9ECEC;  color: #5A5F60;}
+.slide ul { margin-left: 0; margin-right: 0; }
 ul li { list-style-type: square; padding-left: 0.25em; }
 ul li ol li { list-style-type: decimal; }
 a {color: #B81117 !important; border-bottom: 1px solid #B81117; }
@@ -65,25 +66,23 @@ img { border: 1px solid black; }
 <div class="slide">
 <h1>Apache CouchDb</h1>
 <ul>
-    <li>Base NoSQL orienté document &rArr; &quot;schemaless&quot;</li>
+    <li>Base NoSQL orienté document &rArr; schemaless</li>
     <li>Similaire à MongoDb</li>
     <li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
-    <li>Accès par <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
+    <li>Accès <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
     <li>Vues par Map/Reduce écrites en JavaScript (ou PHP, Ruby, Python, Erlang)</li>
-    <li>Encourage la réplication (db locale &harr; db distance)</li>
-    <li>Issue de Lotus Notes (documents, réplication, etc)</li>
+    <li>Encourage la réplication (db locale &harr; db distante)</li>
+    <li>Issue de Lotus Notes (documents, réplication,...)</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>Architecture</h1>
+<img alt="schéma" src="http://couchdb.apache.org/img/sketch.png" style="float: right;" />
 <ul>
-    <li>Construit sur Erlang dans un but de tourner sur des petites configurations (téléphone, navigateur, etc)</li>
-    <li>Toujours cette idée de réplication...</li>
+    <li>Construit sur Erlang dans un but de tourner sur des petites configurations (téléphone)</li>
+    <li>L'idée étant de répliquer les données en local</li>
 </ul>
-<p class="center">
-    <img alt="schéma" src="http://couchdb.apache.org/img/sketch.png" style="margin-top: 1em;"/>
-</p>
 </div>
 
 <div class="slide">
@@ -91,8 +90,8 @@ img { border: 1px solid black; }
 <ul>
     <li>Ubuntu : 
         <ul>
-            <li>base par utilisateur contenant des données, préférences d'applications (fichiers, Rhythmbox, TomBoy, etc)</li>
-            <li>synchro via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
+            <li>base par utilisateur contenant les données et préférences d'applications (fichiers, Rhythmbox, TomBoy, etc)</li>
+            <li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
         </ul>
     </li>
     <li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
@@ -102,38 +101,47 @@ img { border: 1px solid black; }
 
 <div class="slide">
 <h1>Données</h1>
-<ul>
-    <li>Objet JSON</li>
-</ul>
-<span class="javascript">{ id: '123456', name: 'Grégory' }</span>
+<h2>Objet JSON :</h2>
+<div class="javascript">{
+   "_id": "3c64f8626e3cde009c110ac984e3d2fe",
+   "_rev": "1-0a81337cc29f445ebf7fddaa4014abc3",
+   "tags": [ "Amis" ],
+   "lastname": "DUPONT",
+   "firstname": "Emile",
+   "birthdate": "1978-01-13",
+   "contacts": [ 	
+		{ "type": "Portable", "value": "06 75 47 61 00" }, 
+  		{ "type": "email", "value": "dupont@herge.fr" }
+	]
+}</div>
 <ul>    
     <li>Peut contenir des attachements (fichiers)</li>
-    <li>Révisions (conflits)</li>
+    <li>Notion de révisions (et donc de conflit)</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>Accès <acronym title="Representational State Transfer">REST</acronym></h1>
 <ul>
-    <li>Create &rarr; PUT /maBase/id</li>
-    <li>Read &rarr; GET /maBase/id</li>
-    <li>Update &rarr; POST /maBase/id</li>
-    <li>Delete &rarr; DELETE /maBase/id</li>
+    <li>Create &rarr; PUT /db/id</li>
+    <li>Read &rarr; GET /db/id</li>
+    <li>Update &rarr; POST /db/id</li>
+    <li>Delete &rarr; DELETE /db/id</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>En action</h1>
-<code>curl http://127.0.0.1:5984/<br/>
-{"couchdb":"Welcome","version":"0.10.1"}<br/>
-curl -X GET http://127.0.0.1:5984/_all_dbs<br/>
-[]<br/>
-curl -X PUT http://127.0.0.1:5984/db1<br/>
-{"ok":true}<br/>
-curl -X GET http://127.0.0.1:5984/_all_dbs<br/>
-[db1]<br/>
-curl -X DELETE http://127.0.0.1:5984/db1<br/>
-{"ok":true}</code>
+<div class="javascript">curl http://127.0.0.1:5984/
+{"couchdb":"Welcome","version":"0.10.1"}
+curl -X GET http://127.0.0.1:5984/_all_dbs
+[]
+curl -X PUT http://127.0.0.1:5984/db
+{"ok":true}
+curl -X GET http://127.0.0.1:5984/_all_dbs
+[db]
+curl -X DELETE http://127.0.0.1:5984/db
+{"ok":true}</div>
 </div>
 
 <div class="slide center">
@@ -162,7 +170,7 @@ curl -X DELETE http://127.0.0.1:5984/db1<br/>
 <h2>Reduce</h2>
 <div class="javascript">function(tag, count) {
  var sum=0;
- for(var i=0; i < count.length; i++)
+ for(var i=0; i &lt; count.length; i++)
   sum += count[i];
  return sum;
 }</div>
@@ -179,8 +187,10 @@ curl -X DELETE http://127.0.0.1:5984/db1<br/>
 <div class="slide">
 <h1>Ressources</h1>
 <ul>
-    <li><a href="http://couchdb.apache.org/">http://couchdb.apache.org/</a></li>
-    <li><a href="http://twitter.com/couchdb">@couchdb à suivre sur twitter</a></li>
+	<li><a href="http://couchdb.apache.org/">http://couchdb.apache.org/</a></li>
+	<li><a href="http://twitter.com/couchdb">@couchdb à suivre sur twitter</a></li>
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree;f=utils/couchdb-http-requestor;hb=HEAD">CouchDb Http Requestor</a></li>
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></li>
 </ul>
 </div>
 
