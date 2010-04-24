@@ -23,7 +23,7 @@
 <style type="text/css" media="all">
 body {background: url(pix/logo.png) 0.25em 0.25em no-repeat; background-color: white; }
 div#header {background: url(pix/logo.png) 0.25em 0.25em no-repeat; }
-.slide h1 {background:transparent; left: 2em; color: #660F14;}
+.slide h1 {background:transparent; left: 2.5em; color: #660F14;}
 div#footer {background: #E9ECEC;  color: #5A5F60;}
 ul li { list-style-type: square; padding-left: 0.25em; }
 ul li ol li { list-style-type: decimal; }
@@ -105,7 +105,7 @@ img { border: 1px solid black; }
 <ul>
     <li>Objet JSON</li>
 </ul>
-<code class="javascript">{ id: '123456', name: 'Grégory' }</code>
+<span class="javascript">{ id: '123456', name: 'Grégory' }</span>
 <ul>    
     <li>Peut contenir des attachements (fichiers)</li>
     <li>Révisions (conflits)</li>
@@ -151,9 +151,21 @@ curl -X DELETE http://127.0.0.1:5984/db1<br/>
 
 <div class="slide">
 <h1>En action</h1>
-<ul>
-    <li>...</li>
-</ul>
+<h2>Map</h2>
+<div class="javascript">function(doc) {
+  if(doc.tags.length > 0) {
+    for(var idx in doc.tags) {
+      emit(doc.tags[idx], 1);
+    }
+  }
+}</div>
+<h2>Reduce</h2>
+<div class="javascript">function(tag, count) {
+ var sum=0;
+ for(var i=0; i < count.length; i++)
+  sum += count[i];
+ return sum;
+}</div>
 </div>
 
 <div class="slide">
