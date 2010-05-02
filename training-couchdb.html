@@ -80,7 +80,7 @@ img { border: 1px solid black; }
 <h1>Architecture</h1>
 <img alt="schéma" src="http://couchdb.apache.org/img/sketch.png" style="float: right;" />
 <ul>
-    <li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">téléphone</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">navigateur</a>)</li>
+    <li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">Android</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a>)</li>
     <li>L'idée étant de répliquer les données en local</li>
 </ul>
 </div>
@@ -90,11 +90,12 @@ img { border: 1px solid black; }
 <ul>
     <li>Ubuntu : 
         <ul>
-            <li>base par utilisateur contenant les données et préférences d'applications (fichiers, Rhythmbox, TomBoy, etc)</li>
+            <li>base par utilisateur contenant les données et préférences d'applications (fichiers, bookmarks, Ubuntu One Music Store, TomBoy, etc)</li>
             <li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
         </ul>
     </li>
     <li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
+    <li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDb</a></li>
     <li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
 </ul>
 </div>
@@ -177,12 +178,19 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>Application</h1>
-<ul>
-    <li>...</li>
-</ul>
+<h1>Un exemple : <a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></h1>
+<object type="image/svg+xml" data="pix/CouchDb-exemple.svg" style="border: 1px solid black;"></object>
 </div>
 
+<div class="slide">
+<h1>D'autres façons de faire</h1>
+<ul>
+    <li>1 base par utilisateur</li>
+    <li>base répliquée au plus proche de son utilisation (chez le client, dans le navigateur)</li>
+    <li><a href="http://twitter.com/janl/status/13058428177">p2p web</a>&nbsp;:</li>
+</ul>
+<img src="pix/p2p-web-quote.png" alt="quote from Jan Lenhardt" style="float: right;" />
+</div>
 
 <div class="slide">
 <h1>Ressources</h1>
