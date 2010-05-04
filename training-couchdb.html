@@ -78,7 +78,7 @@ img { border: 1px solid black; }
 
 <div class="slide">
 <h1>Architecture</h1>
-<img alt="schéma" src="http://couchdb.apache.org/img/sketch.png" style="float: right;" />
+<img alt="schéma" src="pix/sketch.png" style="float: right;" />
 <ul>
     <li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">Android</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a>)</li>
     <li>L'idée étant de répliquer les données en local</li>
@@ -113,7 +113,8 @@ img { border: 1px solid black; }
    "contacts": [ 	
 		{ "type": "Portable", "value": "06 75 47 61 00" }, 
   		{ "type": "email", "value": "dupont@herge.fr" }
-	]
+	],
+   "tags": ["amis","pro"]
 }</div>
 <ul>    
     <li>Peut contenir des attachements (fichiers)</li>
@@ -132,7 +133,7 @@ img { border: 1px solid black; }
 </div>
 
 <div class="slide">
-<h1>En action</h1>
+<h1>CouchDb en action</h1>
 <div class="javascript">curl http://127.0.0.1:5984/
 {"couchdb":"Welcome","version":"0.10.1"}
 curl -X GET http://127.0.0.1:5984/_all_dbs
@@ -146,15 +147,18 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide center">
-<h1>Futon</h1>
+<h1>Avec Futon</h1>
 <a href="http://127.0.0.1:5984/_utils/">http://127.0.0.1:5984/_utils/</a><br/><br/>
-<img alt="futon" src="http://www.ibm.com/developerworks/jp/opensource/library/os-couchdb/fig01.jpg"/>
+<img alt="futon" src="pix/futon.png" style="width: 95%;" />
 </div>
 
 <div class="slide">
 <h1>Vues</h1>
 <ul>
-<li>&quot;designDocuments&quot;</li>
+<li>des documents, comme les données,</li>
+<li>plus précisément, des &quot;designDocuments&quot;,</li>
+<li>définissent par une fonction <strong>map</strong>,</li>
+<li>définissent éventuellement une fonction <strong>reduce</strong>.</li>
 </ul>
 </div>
 
