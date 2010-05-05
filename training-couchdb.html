@@ -57,22 +57,20 @@ img { border: 1px solid black; }
 <h2><a href="http://javascript.training.free.fr/couchdb/">http://javascript.training.free.fr/couchdb</a></h2>
 <h3>par Grégory PAUL - <a href="http://twitter.com/paulgreg">@paulgreg</a></h3>
 
-<a id="w3" href="http://validator.w3.org/check?uri=referer"><img
-    src="http://www.w3.org/Icons/valid-xhtml10"
-    alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+<a id="w3" href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
 </div>
 
 
 <div class="slide">
 <h1>Apache CouchDb</h1>
 <ul>
-    <li>Base NoSQL orienté document &rArr; schemaless</li>
-    <li>Similaire à MongoDb</li>
-    <li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
-    <li>Accès <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
-    <li>Vues par Map/Reduce écrites en JavaScript (ou PHP, Ruby, Python, Erlang)</li>
-    <li>Encourage la réplication (db locale &harr; db distante)</li>
-    <li>Issue de Lotus Notes (documents, réplication,...)</li>
+	<li>Base NoSQL orienté document &rArr; schemaless</li>
+	<li>Similaire à MongoDb</li>
+	<li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
+	<li>Accès <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
+	<li>Vues par Map/Reduce écrites en JavaScript (ou PHP, Ruby, Python, Erlang)</li>
+	<li>Encourage la réplication (db locale &harr; db distante)</li>
+	<li>Issue de Lotus Notes (documents, réplication,...)</li>
 </ul>
 </div>
 
@@ -80,23 +78,22 @@ img { border: 1px solid black; }
 <h1>Architecture</h1>
 <img alt="schéma" src="pix/sketch.png" style="float: right;" />
 <ul>
-    <li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">Android</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a>)</li>
-    <li>L'idée étant de répliquer les données en local</li>
+	<li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">Android</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a>)</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>Exemples d'utilisation</h1>
 <ul>
-    <li>Ubuntu : 
-        <ul>
-            <li>base par utilisateur contenant les données et préférences d'applications (fichiers, bookmarks, Ubuntu One Music Store, TomBoy, etc)</li>
-            <li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
-        </ul>
-    </li>
-    <li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
-    <li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDb</a></li>
-    <li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
+	<li>Ubuntu : 
+		<ul>
+			<li>base par utilisateur contenant les données et préférences d'applications (fichiers, bookmarks, Ubuntu One Music Store, TomBoy, etc)</li>
+			<li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
+		</ul>
+	</li>
+	<li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
+	<li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDb</a></li>
+	<li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
 </ul>
 </div>
 
@@ -117,18 +114,18 @@ img { border: 1px solid black; }
    "tags": ["amis","pro"]
 }</div>
 <ul>    
-    <li>Peut contenir des attachements (fichiers)</li>
-    <li>Notion de révisions (et donc de conflits)</li>
+	<li>Peut contenir des attachements (fichiers)</li>
+	<li>Notion de révisions (et donc de conflits)</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>Accès <acronym title="Representational State Transfer">REST</acronym></h1>
 <ul>
-    <li><strong>C</strong>reate &rarr; PUT /db/id</li>
-    <li><strong>R</strong>ead &rarr; GET /db/id</li>
-    <li><strong>U</strong>pdate &rarr; POST /db/id</li>
-    <li><strong>D</strong>elete &rarr; DELETE /db/id</li>
+	<li><strong>C</strong>reate &rarr; PUT /db/id</li>
+	<li><strong>R</strong>ead &rarr; GET /db/id</li>
+	<li><strong>U</strong>pdate &rarr; POST /db/id</li>
+	<li><strong>D</strong>elete &rarr; DELETE /db/id</li>
 </ul>
 </div>
 
@@ -136,12 +133,16 @@ img { border: 1px solid black; }
 <h1>CouchDb en action</h1>
 <div class="javascript">curl http://127.0.0.1:5984/
 {"couchdb":"Welcome","version":"0.10.1"}
+
 curl -X GET http://127.0.0.1:5984/_all_dbs
 []
+
 curl -X PUT http://127.0.0.1:5984/db
 {"ok":true}
+
 curl -X GET http://127.0.0.1:5984/_all_dbs
 [db]
+
 curl -X DELETE http://127.0.0.1:5984/db
 {"ok":true}</div>
 </div>
@@ -153,17 +154,35 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>Vues</h1>
+<h1>Import de données</h1>
+<h2>MySQL to CouchDb, SQL to REST</h2>
 <ul>
-<li>des documents, comme les données,</li>
-<li>plus précisément, des &quot;designDocuments&quot;,</li>
-<li>définissent par une fonction <strong>map</strong>,</li>
-<li>définissent éventuellement une fonction <strong>reduce</strong>.</li>
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=private/importFromGContact.php;h=cbe872dc706c4f40e9aed4f85481a5ad381818f4;hb=HEAD">importFromGContact.php</a></li>
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=code/server/couchDbRequestor.php;h=44aa6895ffe7ebde677286b3f7c5a7056ae6f969;hb=HEAD">CouchDbRequestor.php</a></li>
 </ul>
 </div>
 
 <div class="slide">
-<h1>En action</h1>
+<h1>Vues</h1>
+<ul>
+<li>des documents, comme les données,</li>
+<li>plus précisément, des &quot;designDocuments&quot;,</li>
+<li>définies par une fonction <strong>map</strong>,</li>
+<li>éventuellement définies par une fonction <strong>reduce</strong>.</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>En action : tous les contacts</h1>
+<h2>Map</h2>
+<div class="javascript">function(doc) {
+   if (doc.lastname)
+     emit(doc.lastname, doc);
+}</div>
+</div>
+
+<div class="slide">
+<h1>En action : les tags</h1>
 <h2>Map</h2>
 <div class="javascript">function(doc) {
   if(doc.tags.length > 0) {
@@ -173,10 +192,10 @@ curl -X DELETE http://127.0.0.1:5984/db
   }
 }</div>
 <h2>Reduce</h2>
-<div class="javascript">function(tag, count) {
+<div class="javascript">function(v, tags) {
  var sum=0;
- for(var i=0; i &lt; count.length; i++)
-  sum += count[i];
+ for(var i=0; i &lt; tags.length; i++)
+  sum += tags[i];
  return sum;
 }</div>
 </div>
@@ -191,7 +210,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 <ul>
     <li>1 base par utilisateur</li>
     <li>base répliquée au plus proche de son utilisation (chez le client, dans le navigateur)</li>
-    <li><a href="http://twitter.com/janl/status/13058428177">p2p web</a>&nbsp;(<a href="http://www.parleys.com/#st=5&id=1867">confère parleys</a>)&nbsp;:</li>
+    <li><a href="http://twitter.com/janl/status/13058428177">p2p web</a>&nbsp;(<a href="http://www.parleys.com/#st=5&amp;id=1867">confère parleys</a>)&nbsp;:</li>
 </ul>
 <img src="pix/p2p-web-quote.png" alt="quote from Jan Lenhardt" style="float: right;" />
 </div>
