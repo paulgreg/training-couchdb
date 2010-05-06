@@ -757,7 +757,7 @@ function startup() {
 	}
 	document.onkeyup = keys;
 	document.onkeypress = trap;
-	document.onclick = clicker;
+	//document.onclick = clicker; Do not change slide on click
 }
 
 window.onload = startup;
