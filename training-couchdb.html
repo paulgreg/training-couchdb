@@ -4,7 +4,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<title>Introduction à CouchDb</title>
+<title>Introduction à CouchDB</title>
 <!-- metadata -->
 <meta name="generator" content="S5" />
 <meta name="version" content="1.0" />
@@ -31,6 +31,7 @@ ul li ol li { list-style-type: decimal; }
 a {color: #B81117 !important; border-bottom: 1px solid #B81117; }
 #w3, #w3 img { float: right; border: 0; }
 .javascript { color: #553333; font-size: 0.6em; white-space: pre; font-family: monospace; border: 1px solid black; margin: 0.2em; padding: 0.5em; background-color: #FFFFEE; }
+.headers { font-size: x-small; color: #553333; font-size: 0.6em; white-space: pre; font-family: monospace; border: 1px solid black; margin: 0.2em; padding: 0.5em; background-color: #FFFFEE; }
 .center { text-align: center; }
 img { border: 1px solid black; }
 </style>
@@ -45,7 +46,7 @@ img { border: 1px solid black; }
 <div id="header"></div>
 
 <div id="footer">
-<h1>Introduction à CouchDb</h1>
+<h1>Introduction à CouchDB</h1>
 <h2>2010</h2>
 </div>
 </div>
@@ -53,7 +54,7 @@ img { border: 1px solid black; }
 <div class="presentation">
 
 <div class="slide">
-<h1>Introduction à <a href="http://couchdb.apache.org/">CouchDb</a></h1>
+<h1>Introduction à <a href="http://couchdb.apache.org/">CouchDB</a></h1>
 <h2><a href="http://javascript.training.free.fr/couchdb/">http://javascript.training.free.fr/couchdb</a></h2>
 <h3>par Grégory PAUL - <a href="http://twitter.com/paulgreg">@paulgreg</a></h3>
 
@@ -62,9 +63,9 @@ img { border: 1px solid black; }
 
 
 <div class="slide">
-<h1>Apache CouchDb</h1>
+<h1>Apache CouchDB</h1>
 <ul>
-	<li>Base NoSQL orienté document &rArr; schemaless</li>
+	<li>Base NoSQL orienté document &rArr; sans schéma</li>
 	<li>Similaire à MongoDb</li>
 	<li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
 	<li>Accès <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
@@ -79,20 +80,22 @@ img { border: 1px solid black; }
 <img alt="schéma" src="pix/sketch.png" style="float: right;" />
 <ul>
 	<li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">Android</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a>)</li>
+	<li>&quot;Highly concurrent&quot;</li>
+	<li>Réplication N-maître</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>Exemples d'utilisation</h1>
 <ul>
-	<li>Ubuntu : 
+	<li><a href="https://wiki.ubuntu.com/DesktopTeam/Specs/Karmic/IntegratingWithUbuntuOne">Ubuntu</a> : 
 		<ul>
-			<li>base par utilisateur contenant les données et préférences d'applications (fichiers, bookmarks, Ubuntu One Music Store, TomBoy, etc)</li>
+			<li>base par utilisateur avec les données et préférences d'applications (contacts, bookmarks, TomBoy, etc)</li>
 			<li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
 		</ul>
 	</li>
 	<li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
-	<li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDb</a></li>
+	<li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDB</a></li>
 	<li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
 </ul>
 </div>
@@ -114,7 +117,7 @@ img { border: 1px solid black; }
    "tags": ["amis","pro"]
 }</div>
 <ul>    
-	<li>Peut contenir des attachements (fichiers)</li>
+	<li>Peut contenir des attachements binaires (fichiers)</li>
 	<li>Notion de révisions (et donc de conflits)</li>
 </ul>
 </div>
@@ -130,7 +133,7 @@ img { border: 1px solid black; }
 </div>
 
 <div class="slide">
-<h1>CouchDb en action</h1>
+<h1>Démo : CouchDB, premiers pas</h1>
 <div class="javascript">curl http://127.0.0.1:5984/
 {"couchdb":"Welcome","version":"0.10.1"}
 
@@ -145,6 +148,7 @@ curl -X GET http://127.0.0.1:5984/_all_dbs
 
 curl -X DELETE http://127.0.0.1:5984/db
 {"ok":true}</div>
+<a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree;f=utils/couchdb-http-requestor;hb=HEAD">CouchDB Http Requestor</a>
 </div>
 
 <div class="slide center">
@@ -154,11 +158,11 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>Import de données</h1>
-<h2>MySQL to CouchDb, SQL to REST</h2>
+<h1>Démo : import de données</h1>
+<p>MySQL to CouchDB, <acronym title="Structured Query Language">SQL</acronym> to <acronym title="Representational State Transfer">REST</acronym></p>
 <ul>
 	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=private/importFromGContact.php;h=cbe872dc706c4f40e9aed4f85481a5ad381818f4;hb=HEAD">importFromGContact.php</a></li>
-	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=code/server/couchDbRequestor.php;h=44aa6895ffe7ebde677286b3f7c5a7056ae6f969;hb=HEAD">CouchDbRequestor.php</a></li>
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=code/server/couchDbRequestor.php;h=44aa6895ffe7ebde677286b3f7c5a7056ae6f969;hb=HEAD">CouchDBRequestor.php</a></li>
 </ul>
 </div>
 
@@ -167,13 +171,13 @@ curl -X DELETE http://127.0.0.1:5984/db
 <ul>
 <li>des documents, comme les données,</li>
 <li>plus précisément, des &quot;designDocuments&quot;,</li>
-<li>définies par une fonction <strong>map</strong>,</li>
-<li>éventuellement définies par une fonction <strong>reduce</strong>.</li>
+<li>définies par une fonction <strong>map</strong> (X appels),</li>
+<li>éventuellement définies par une fonction <strong>reduce</strong> (1 ou peu d'appel, rereduce).</li>
 </ul>
 </div>
 
 <div class="slide">
-<h1>En action : tous les contacts</h1>
+<h1>Démo : tous les contacts</h1>
 <h2>Map</h2>
 <div class="javascript">function(doc) {
    if (doc.lastname)
@@ -182,7 +186,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>En action : les tags</h1>
+<h1>Démo : groupe de tags</h1>
 <h2>Map</h2>
 <div class="javascript">function(doc) {
   if(doc.tags.length > 0) {
@@ -202,25 +206,52 @@ curl -X DELETE http://127.0.0.1:5984/db
 
 <div class="slide">
 <h1>Un exemple : <a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></h1>
-<object type="image/svg+xml" data="pix/CouchDb-exemple.svg" style="border: 1px solid black;"></object>
+<object type="image/svg+xml" data="pix/CouchDB-exemple.svg" style="border: 1px solid black;"></object>
+</div>
+
+
+<div class="slide">
+<h1>Stand-alone applications</h1>
+<div class="headers"><a href="http://jchrisa.net/cal/_design/cal/index.html">http://jchrisa.net/cal/_design/cal/index.html</a>
+
+GET /cal/_design/cal/index.html HTTP/1.1
+Host: jchrisa.net
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+[...]
+ 
+HTTP/1.1 200 OK
+Date: Thu, 06 May 2010 20:12:22 GMT
+<strong>Server: CouchDB/0.10.0 (Erlang OTP/R13B)</strong>
+Connection: close
+[...]
+</div>
+<a href="http://books.couchdb.org/relax/example-app/standalone-applications#In%20the%20Wild">Autres exemples...</a>
 </div>
 
 <div class="slide">
 <h1>D'autres façons de faire</h1>
 <ul>
-    <li>1 base par utilisateur</li>
-    <li>base répliquée au plus proche de son utilisation (chez le client, dans le navigateur)</li>
-    <li><a href="http://twitter.com/janl/status/13058428177">p2p web</a>&nbsp;(<a href="http://www.parleys.com/#st=5&amp;id=1867">confère parleys</a>)&nbsp;:</li>
+	<li>1 base par utilisateur</li>
+	<li>base répliquée au plus proche de son utilisation (chez le client, dans le navigateur)</li>
+	<li>CouchDB = données + vues map/reduce + vues html</li>
+	<li>utilisation offline</li>
+	<li>base répliqués entre clients</li>
+	<li>&quot;p2p web&quot; : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">CouchDB to the Edge</a>, <a href="http://www.parleys.com/#st=5&amp;id=1867">CouchDB on the web</a></li>
 </ul>
-<img src="pix/p2p-web-quote.png" alt="quote from Jan Lenhardt" style="float: right;" />
+<a href="http://twitter.com/janl/status/13058428177"><img src="pix/p2p-web-quote.png" alt="quote from Jan Lenhardt" style="float: right; margin-top: 1em;" /></a>
 </div>
 
 <div class="slide">
+
 <h1>Ressources</h1>
 <ul>
 	<li><a href="http://couchdb.apache.org/">http://couchdb.apache.org/</a></li>
+	<li><a href="http://books.couchdb.org/relax/">CouchDB: The definitive guide</a> (Livre O'Reilly complet)</li>
 	<li><a href="http://twitter.com/couchdb">@couchdb à suivre sur twitter</a></li>
-	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree;f=utils/couchdb-http-requestor;hb=HEAD">CouchDb Http Requestor</a></li>
+	<li>CouchDB to the Edge : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">slides</a>, 
+		vidéos <a href="http://jsconf.us/2009/couch_video.html">JsConf.us 2009</a> &amp;
+		<a href="http://jsconf.eu/2009/video_writing_apps_on_the_edge.html">JsConf.eu 2009</a></li>
 	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></li>
 </ul>
 </div>
