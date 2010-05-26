@@ -69,10 +69,14 @@ img { border: 1px solid black; }
 <h1>Apache CouchDB</h1>
 <ul>
 	<li>Base NoSQL orientée document &rArr; sans schéma</li>
-	<li>Similaire à MongoDB</li>
-	<li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
-	<li>Accès <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
-	<li>Vues par Map/Reduce écrites en JavaScript (ou PHP, Ruby, Python, Erlang)</li>
+	<li>Comparable à MongoDB dans le monde Java</li>
+	<li>Mais embrasse le web :
+		<ul>
+			<li>Stockage au format <acronym title="JavaScript Object Notation">JSON</acronym></li>
+			<li>Accès <acronym title="Representational State Transfer">REST</acronym> (uniquement)</li>
+			<li>Vues par Map/Reduce (en JavaScript)</li>
+		</ul>			
+	</li>
 	<li>Encourage la réplication (db locale &harr; db distante)</li>
 	<li>Issue de Lotus Notes (documents, réplication,...)</li>
 </ul>
@@ -216,7 +220,6 @@ curl -X DELETE http://127.0.0.1:5984/db
 <div class="javascript">function(v, tags) {
  var sum=0;
  for(var i=0; i &lt; tags.length; i++)
-
   sum += tags[i];
  return sum;
 }</div>
