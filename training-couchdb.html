@@ -28,6 +28,7 @@ div#footer {background: #E9ECEC;  color: #5A5F60;}
 .slide ul { margin-left: 0; margin-right: 0; }
 ul li { list-style-type: square; padding-left: 0.25em; }
 ul li ol li { list-style-type: decimal; }
+hr { border: 1px solid #553333; }
 a {color: #B81117 !important; border-bottom: 1px solid #B81117; }
 #w3, #w3 img { float: right; border: 0; }
 .javascript { color: #553333; font-size: 0.6em; white-space: pre; font-family: monospace; border: 1px solid black; margin: 0.2em; padding: 0.5em; background-color: #FFFFEE; }
@@ -96,7 +97,7 @@ img { border: 1px solid black; }
 			<li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li>
 		</ul>
 	</li>
-	<li><a href="http://architects.dzone.com/articles/couchdb-making-it-okay-work">Making it Okay to Work Offline</a></li>
+	<li>Palm : <a href="http://architects.dzone.com/articles/couchdb-making-it-okay-work">Making it Okay to Work Offline</a></li>
 	<li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
 	<li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDB</a></li>
 	<li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
@@ -132,7 +133,10 @@ img { border: 1px solid black; }
 	<li><strong>R</strong>ead &rarr; GET /myDb/3c64f8684e3d2fe</li>
 	<li><strong>U</strong>pdate &rarr; POST /myDb/3c64f8684e3d2fe</li>
 	<li><strong>D</strong>elete &rarr; DELETE /myDb/3c64f8684e3d2fe</li>
-	<li>HTTP+REST &rArr; cache, proxy, etag, etc</li>
+</ul>
+<hr/>
+<ul>
+	<li>HTTP+REST &rArr; cache, proxy, <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a>, etc</li>
 </ul>
 </div>
 
@@ -176,24 +180,31 @@ curl -X DELETE http://127.0.0.1:5984/db
 <h1>Vues</h1>
 <ul>
 <li>des documents, comme les données,</li>
-<li>plus précisément, des &quot;designDocuments&quot;,</li>
-<li>définies par une fonction <strong>map</strong>,</li>
-<li>éventuellement définies par une fonction <strong>reduce</strong>.</li>
+<li>plus précisément, des &quot;designDocuments&quot; (_design),</li>
+<li>définies par une fonction <strong><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">map</a></strong> (résultats stockés dans un <a href="http://en.wikipedia.org/wiki/B%2B_tree">B+ Tree</a>),</li>
+<li>éventuellement définies par une fonction <strong><a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">reduce</a></strong>.</li>
 </ul>
 </div>
 
 <div class="slide">
 <h1>Démo : tous les contacts</h1>
-<h2>Map</h2>
+<h2><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">Map</a></h2>
 <div class="javascript">function(doc) {
    if (doc.lastname)
      emit(doc.lastname, doc);
 }</div>
+<div class="javascript">function(doc) {
+	emit([doc.lastname, doc.firstname], doc);
+}</div>
+<ul>
+<li>Accès par <code>key</code>:<a href="http://localhost:5984/paulgreg/_design/person/_view/allPersons?key=[%22ZHANG%22,%22Janice%22]">_design/person/_view/allPersons?key=["ZHANG","Janice"]</a></li>
+<li>ou par <code>startKey</code>/<code>endKey</code>:<a href="http://localhost:5984/paulgreg/_design/person/_view/allPersons?startkey=[%22Z%22,%22A%22]&amp;endkey=[%22Z\u9999%22,%22\u9999%22]">allPersons?startkey=["Z","A"]&amp;endkey=["Z\u9999","\u9999"]</a></li>
+</ul>
 </div>
 
 <div class="slide">
 <h1>Démo : groupe de tags</h1>
-<h2>Map</h2>
+<h2><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">Map</a></h2>
 <div class="javascript">function(doc) {
   if(doc.tags.length > 0) {
     for(var idx in doc.tags) {
@@ -201,7 +212,7 @@ curl -X DELETE http://127.0.0.1:5984/db
     }
   }
 }</div>
-<h2>Reduce</h2>
+<h2><a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Reduce</a></h2>
 <div class="javascript">function(v, tags) {
  var sum=0;
  for(var i=0; i &lt; tags.length; i++)
@@ -218,6 +229,26 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 </div>
 
+<div class="slide">
+<h1>Réplication</h1>
+<h2>Réplication "one-shot"</h2>
+<div class="javascript">
+POST /_replicate HTTP/1.1
+{
+ "source":"example-database",
+ "target":"http://example.org/example-database"
+}
+</div>
+<h2>Réplication continue</h2>
+<div class="javascript">
+POST /_replicate HTTP/1.1
+{
+ "source":"example-database",
+ "target":"http://example.org/example-database",
+ <strong>"continuous":true</strong>
+}
+</div>
+</div>
 
 <div class="slide">
 <h1>Stand-alone applications</h1>
