@@ -217,12 +217,12 @@ curl -X DELETE http://127.0.0.1:5984/db
   }
 }</div>
 <h2><a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Reduce</a></h2>
-<div class="javascript">function(v, tags) {
+<div class="javascript">function(keys, values) {
  var sum=0;
- for(var i=0; i &lt; tags.length; i++)
-  sum += tags[i];
+ for(var i=0; i &lt; values.length; i++)
+  sum += values[i];
  return sum;
-} // => _count
+} // ou sum(values) ou _count
 </div>
 
 <div class="slide">
