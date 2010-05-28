@@ -222,7 +222,7 @@ curl -X DELETE http://127.0.0.1:5984/db
  for(var i=0; i &lt; tags.length; i++)
   sum += tags[i];
  return sum;
-}</div>
+} // => _count
 </div>
 
 <div class="slide">
@@ -235,22 +235,18 @@ curl -X DELETE http://127.0.0.1:5984/db
 <div class="slide">
 <h1>Réplication</h1>
 <h2>Réplication "one-shot"</h2>
-<div class="javascript">
-POST /_replicate HTTP/1.1
+<div class="javascript">POST /_replicate HTTP/1.1
 {
  "source":"example-database",
  "target":"http://example.org/example-database"
-}
-</div>
+}</div>
 <h2>Réplication continue</h2>
-<div class="javascript">
-POST /_replicate HTTP/1.1
+<div class="javascript">POST /_replicate HTTP/1.1
 {
  "source":"example-database",
  "target":"http://example.org/example-database",
  <strong>"continuous":true</strong>
-}
-</div>
+}</div>
 </div>
 
 <div class="slide">
