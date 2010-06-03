@@ -226,6 +226,74 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
+<h1>CouchDB JOINs Redux</h1>
+<div class="javascript">{
+  "_id": "Claire",
+  "title": "VP of Official Attitude"
+}
+{
+  "_id": "Mikeal",
+  "title": "VP of Pastries and Automating Stuff"
+}
+{
+  "_id": "Jason",
+  "title": "VP of Hosting and Lightning"
+}
+{
+  "_id": "team",
+  "members": ["Claire", "Mikeal", "Jason"]
+}
+</div>
+</div>
+
+<div class="slide">
+<h1>CouchDB JOINs Redux</h1>
+<span>Map function:</span>
+<div class="javascript">function(doc) {
+  if(doc.members) {
+    doc.members.forEach(function(member) {
+      emit(member, {_id: member});
+    });
+  }
+}</div>
+<span>Results :</span>
+<div class="javascript">{
+  total_rows: 4, offset: 0,
+  rows: [
+    {"key":"Claire", "value":{"_id":"Claire"}},
+    {"key":"Jason", "value":{"_id":"Jason"}},
+    {"key":"Mikeal", "value":{"_id":"Mikeal"}}
+  ]
+}
+</div>
+</div>
+
+<div class="slide">
+<h1>CouchDB JOINs Redux</h1>
+<span>&amp;;include_docs=true &rArr; result looks like this:</span>
+<div class="javascript">{
+  total_rows: 4, offset: 0,
+  rows: [
+    {
+      "key":"Claire",
+      "value":{"_id":"Claire"},
+      "doc": {"_id":"Claire","title":"VP of Official Attitude"}
+    },
+    {
+      "key":"Jason",
+      "value":{"_id":"Jason"},
+      "doc": {"_id":"Jason","title":"VP of Hosting and Lightning"}
+    },
+    {
+      "key":"Mikeal",
+      "value":{"_id":"Mikeal"},
+      "doc": {"_id":"Mikeal","title":"VP of Pastries and Automating Stuff"}
+    }
+  ]
+}</div>
+</div>
+
+<div class="slide">
 <h1>Un exemple : <a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></h1>
 <div class="center" style="width 100%; height: 100%;">
 	<object type="image/svg+xml" data="pix/CouchDB-exemple.svg" style="border: 1px solid black; width: 98%; min-height: 300px;"></object>
@@ -287,6 +355,7 @@ Connection: close
 
 <h1>Ressources</h1>
 <ul>
+	<li><a href="http://rsstodolist.appspot.com/?n=couchdb">http://rsstodolist.appspot.com/?n=couchdb</a></li>
 	<li><a href="http://couchdb.apache.org/">http://couchdb.apache.org/</a></li>
 	<li><a href="http://books.couchdb.org/relax/">CouchDB: The definitive guide</a> (Livre O'Reilly complet)</li>
 	<li>CouchDB to the Edge : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">slides</a>, 
