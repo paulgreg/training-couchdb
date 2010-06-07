@@ -249,7 +249,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 
 <div class="slide">
 <h1>CouchDB JOINs Redux</h1>
-<span>Map function:</span>
+<span>Map :</span>
 <div class="javascript">function(doc) {
   if(doc.members) {
     doc.members.forEach(function(member) {
@@ -257,7 +257,7 @@ curl -X DELETE http://127.0.0.1:5984/db
     });
   }
 }</div>
-<span>Results :</span>
+<span>Résultats :</span>
 <div class="javascript">{
   total_rows: 4, offset: 0,
   rows: [
@@ -271,7 +271,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 
 <div class="slide">
 <h1>CouchDB JOINs Redux</h1>
-<span>&amp;include_docs=true &rArr; result looks like this:</span>
+<span>&amp;include_docs=true &rArr; résultats :</span>
 <div class="javascript">{
   total_rows: 4, offset: 0,
   rows: [
