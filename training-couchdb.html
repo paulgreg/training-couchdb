@@ -147,11 +147,10 @@ img { border: 1px solid black; }
 	<li><strong>R</strong>ead &rarr; GET /myDb/3c64f82fe</li>
 	<li><strong>U</strong>pdate &rarr; POST /myDb/3c64f82fe?rev=2-1568290e8</li>
 	<li><strong>D</strong>elete &rarr; DELETE /myDb/3c64f82fe?rev=2-1568290e8</li>
-	<li>et même <a href="http://www.webdav.org/specs/rfc2518.html%23METHOD_COPY">COPY</a></li>
+	<li><span class="incremental">et même <a href="http://www.webdav.org/specs/rfc2518.html%23METHOD_COPY">COPY</a></span></li>
 </ul>
-<hr/>
 <ul>
-	<li>HTTP+REST &rArr; cache, proxy, <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a>, etc</li>
+	<li><span class="incremental">HTTP+REST &rArr; cache, proxy, <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a>, etc</span></li>
 </ul>
 </div>
 
@@ -239,14 +238,35 @@ curl -X DELETE http://127.0.0.1:5984/db
 <div class="slide">
 <h1>Démo : nuage de tags 2/2</h1>
 <ul>
-	<li>Accès à la vue : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud?reduce=false">_design/tag/_view/tagCloud?reduce=false</a></li>
-	<li>Accès à la réduction : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud">_design/tag/_view/tagCloud</a></li>
-	<li>Accès à la réduction groupée : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud?group=true">_design/tag/_view/tagCloud?group=true</a></li>
+	<li>Vue : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud?reduce=false">_design/tag/_view/tagCloud?reduce=false</a></li>
+	<li>Réduction : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud">_design/tag/_view/tagCloud</a></li>
+	<li>Réduction groupée : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud?group=true">_design/tag/_view/tagCloud?group=true</a></li>
 </ul>
 </div>
 
 <div class="slide">
-<h1>CouchDB JOINs Redux 1/3</h1>
+<h1>Démo : Niveau de réduction 1/2</h1>
+<h2><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">Map</a></h2>
+<div class="javascript">function(doc) {
+for(var idx in doc.addresses) { 
+   emit([doc.addresses[idx].country, doc.addresses[idx].town ],null);
+  }
+}</div>
+<h2><a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Reduce</a></h2>
+<div class="javascript">_count</div>
+</div>
+
+<div class="slide">
+<h1>Démo : Niveau de réduction 2/2</h1>
+<ul>
+<li>Vue : <a href="http://localhost:5984/paulgreg/_design/person/_view/localisation?reduce=false">_design/person/_view/localisation?reduce=false</a></li>
+<li>Réduction groupée : <a href="http://localhost:5984/paulgreg/_design/person/_view/localisation?group=true">_design/person/_view/localisation?group=true</a></li>
+<li>Réduction groupée niv. 1 : <a href="http://localhost:5984/paulgreg/_design/person/_view/localisation?group=true&amp;group_level=1">_design/person/_view/localisation?group=true&amp;group_level=1</a></li>
+<li>Réduction groupée niv. 2 : <a href="http://localhost:5984/paulgreg/_design/person/_view/localisation?group=true&amp;group_level=2">_design/person/_view/localisation?group=true&amp;group_level=2</a></li></ul>
+</div>
+
+<div class="slide">
+<h1>JOINs Redux 1/3</h1>
 <div class="javascript">{
   "_id": "Claire",
   "title": "VP of Official Attitude"
@@ -262,12 +282,11 @@ curl -X DELETE http://127.0.0.1:5984/db
 {
   "_id": "team",
   "members": ["Claire", "Mikeal", "Jason"]
-}
-</div>
+}</div>
 </div>
 
 <div class="slide">
-<h1>CouchDB JOINs Redux 2/3</h1>
+<h1>JOINs Redux 2/3</h1>
 <span>Map :</span>
 <div class="javascript">function(doc) {
   if(doc.members) {
@@ -284,12 +303,11 @@ curl -X DELETE http://127.0.0.1:5984/db
     {"key":"Jason", "value":{"_id":"Jason"}},
     {"key":"Mikeal", "value":{"_id":"Mikeal"}}
   ]
-}
-</div>
+}</div>
 </div>
 
 <div class="slide">
-<h1>CouchDB JOINs Redux 3/3</h1>
+<h1>JOINs Redux 3/3</h1>
 <span>&amp;include_docs=true &rArr; résultats :</span>
 <div class="javascript">{
   total_rows: 4, offset: 0,
@@ -364,10 +382,10 @@ Connection: close
 	<li>1 base par utilisateur</li>
 	<li>Le site le plus rapide sur internet : <a href="http://localhost">http://localhost</a> donc base répliquée au plus proche de son utilisation (client, navigateur)</li>
 	<li>Du coup, utilisation offline</li>
-	<li>CouchApps = JSON data + map/reduce + Html/JavaScript/CSS</li>
+	<li>CouchApps = JSON data + map/reduce + HTMl/CSS/JS</li>
 	<li>bases répliquées entre clients</li>
 	<li>&quot;p2p web&quot; : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">CouchDB to the Edge</a>, <a href="http://www.parleys.com/#st=5&amp;id=1867">CouchDB on the web</a></li>
-	<li>Pour répondre à <a href="http://facebook.com/">FaceBook</a>/<a href="http://joindiaspora.com/">Diaspora</a>, <a href="http://www.infoq.com/news/2010/06/couchdb">avoir ses données sur son serveur CouchDB</a></li>
+	<li><a href="http://facebook.com/">FaceBook</a>/<a href="http://joindiaspora.com/">Diaspora</a> : <a href="http://www.infoq.com/news/2010/06/couchdb">avoir ses données sur son serveur CouchDB</a></li>
 </ul>
 <a href="http://twitter.com/janl/status/13058428177"><img src="pix/p2p-web-quote.png" alt="quote from Jan Lenhardt" style="float: right; margin-top: 1em;" /></a>
 </div>
