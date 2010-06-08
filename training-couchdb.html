@@ -1,7 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>Introduction à CouchDB</title>
@@ -89,6 +88,7 @@ img { border: 1px solid black; }
 	<li>Construit sur Erlang dans un but de tourner sur des petites configurations (<a href="http://blog.couch.io/post/440148422/win-this-nexus-one-phone">Android</a>, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a>)</li>
 	<li>&quot;Highly concurrent&quot;</li>
 	<li>Réplication N-maître</li>
+	<li>Extensible</li>
 </ul>
 </div>
 
@@ -102,7 +102,8 @@ img { border: 1px solid black; }
 		</ul>
 	</li>
 	<li>Palm : <a href="http://architects.dzone.com/articles/couchdb-making-it-okay-work">Making it Okay to Work Offline</a></li>
-	<li><a href="http://saucelabs.com/">Sauce Labs</a> : &quot;in the cloud cross-browser testing with Selenium&quot;</li>
+	<li><a href="https://mozillalabs.com/raindrop/">Mozilla Labs  Raindrop</a> : Agrégateur de messages (Gmail, Twitter, ...)</li>
+	<li><a href="http://saucelabs.com/">Sauce Labs</a> : Selenium cross-browser testing in the cloud</li>
 	<li>Une idée intéressante : <a href="http://blog.fupps.com/2010/04/30/dns-backed-by-couchdb/">DNS en CouchDB</a></li>
 	<li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li>
 </ul>
@@ -110,10 +111,11 @@ img { border: 1px solid black; }
 
 <div class="slide">
 <h1>Données</h1>
+<div class="slidecontent">
 <h2>Objet JSON :</h2>
 <div class="javascript">{
    "_id": "3c64f8626e3cde009c110ac984e3d2fe",
-   "_rev": "1-0a81337cc29f445ebf7fddaa4014abc3",
+   <span class="incremental">"_rev": "1-0a81337cc29f445ebf7fddaa4014abc3",</span>
    "tags": [ "Amis" ],
    "lastname": "DUPONT",
    "firstname": "Emile",
@@ -122,8 +124,16 @@ img { border: 1px solid black; }
 		{ "type": "Portable", "value": "06 75 47 61 00" }, 
   		{ "type": "email", "value": "dupont@herge.fr" }
 	],
-   "tags": ["amis","pro"]
+   "tags": ["amis","pro"],
+   "country": "France",
+   "town": "Paris"<span class="incremental">,
+   "_attachments": {
+      "photo.jpg": { "content_type": "image/jpeg", "length": 1276983, "stub": true }
+   }</span>
 }</div>
+</div>
+</div>
+<div class="handout">
 <ul>    
 	<li>Peut contenir des attachements binaires (fichiers)</li>
 	<li>Notion de révisions (et donc de conflits)</li>
@@ -133,10 +143,11 @@ img { border: 1px solid black; }
 <div class="slide">
 <h1>Accès <acronym title="Representational State Transfer">REST</acronym></h1>
 <ul>
-	<li><strong>C</strong>reate &rarr; PUT /myDb/3c64f8684e3d2fe</li>
-	<li><strong>R</strong>ead &rarr; GET /myDb/3c64f8684e3d2fe</li>
-	<li><strong>U</strong>pdate &rarr; POST /myDb/3c64f8684e3d2fe</li>
-	<li><strong>D</strong>elete &rarr; DELETE /myDb/3c64f8684e3d2fe</li>
+	<li><strong>C</strong>reate &rarr; PUT /myDb/3c64f82fe</li>
+	<li><strong>R</strong>ead &rarr; GET /myDb/3c64f82fe</li>
+	<li><strong>U</strong>pdate &rarr; POST /myDb/3c64f82fe?rev=2-1568290e8</li>
+	<li><strong>D</strong>elete &rarr; DELETE /myDb/3c64f82fe?rev=2-1568290e8</li>
+	<li>et même <a href="http://www.webdav.org/specs/rfc2518.html%23METHOD_COPY">COPY</a></li>
 </ul>
 <hr/>
 <ul>
@@ -207,7 +218,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>Démo : groupe de tags</h1>
+<h1>Démo : nuage de tags 1/2</h1>
 <h2><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">Map</a></h2>
 <div class="javascript">function(doc) {
   if(doc.tags.length > 0) {
@@ -225,9 +236,17 @@ curl -X DELETE http://127.0.0.1:5984/db
 } // ou sum(values) ou _count
 </div>
 </div>
+<div class="slide">
+<h1>Démo : nuage de tags 2/2</h1>
+<ul>
+	<li>Accès à la vue : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud?reduce=false">_design/tag/_view/tagCloud?reduce=false</a></li>
+	<li>Accès à la réduction : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud">_design/tag/_view/tagCloud</a></li>
+	<li>Accès à la réduction groupée : <a href="http://localhost:5984/paulgreg/_design/tag/_view/tagCloud?group=true">_design/tag/_view/tagCloud?group=true</a></li>
+</ul>
+</div>
 
 <div class="slide">
-<h1>CouchDB JOINs Redux</h1>
+<h1>CouchDB JOINs Redux 1/3</h1>
 <div class="javascript">{
   "_id": "Claire",
   "title": "VP of Official Attitude"
@@ -248,7 +267,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>CouchDB JOINs Redux</h1>
+<h1>CouchDB JOINs Redux 2/3</h1>
 <span>Map :</span>
 <div class="javascript">function(doc) {
   if(doc.members) {
@@ -270,7 +289,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>CouchDB JOINs Redux</h1>
+<h1>CouchDB JOINs Redux 3/3</h1>
 <span>&amp;include_docs=true &rArr; résultats :</span>
 <div class="javascript">{
   total_rows: 4, offset: 0,
@@ -319,7 +338,7 @@ curl -X DELETE http://127.0.0.1:5984/db
 </div>
 
 <div class="slide">
-<h1>Stand-alone applications</h1>
+<h1>Stand-alone applications / CouchApps</h1>
 <div class="headers"><a href="http://jchrisa.net/cal/_design/cal/index.html">http://jchrisa.net/cal/_design/cal/index.html</a>
 
 GET /cal/_design/cal/index.html HTTP/1.1
@@ -340,30 +359,31 @@ Connection: close
 </div>
 
 <div class="slide">
-<h1>D'autres façons de faire</h1>
+<h1>De nouvelles façons de faire</h1>
 <ul>
 	<li>1 base par utilisateur</li>
-	<li>base répliquée au plus proche de son utilisation (chez le client, dans le navigateur)</li>
-	<li>CouchDB = données + vues map/reduce + vues html</li>
-	<li>utilisation offline</li>
-	<li>base répliqués entre clients</li>
+	<li>Le site le plus rapide sur internet : <a href="http://localhost">http://localhost</a> donc base répliquée au plus proche de son utilisation (client, navigateur)</li>
+	<li>Du coup, utilisation offline</li>
+	<li>CouchApps = JSON data + map/reduce + Html/JavaScript/CSS</li>
+	<li>bases répliquées entre clients</li>
 	<li>&quot;p2p web&quot; : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">CouchDB to the Edge</a>, <a href="http://www.parleys.com/#st=5&amp;id=1867">CouchDB on the web</a></li>
+	<li>Pour répondre à <a href="http://facebook.com/">FaceBook</a>/<a href="http://joindiaspora.com/">Diaspora</a>, <a href="http://www.infoq.com/news/2010/06/couchdb">avoir ses données sur son serveur CouchDB</a></li>
 </ul>
 <a href="http://twitter.com/janl/status/13058428177"><img src="pix/p2p-web-quote.png" alt="quote from Jan Lenhardt" style="float: right; margin-top: 1em;" /></a>
 </div>
 
 <div class="slide">
-
 <h1>Ressources</h1>
 <ul>
-	<li><a href="http://rsstodolist.appspot.com/?n=couchdb">http://rsstodolist.appspot.com/?n=couchdb</a></li>
 	<li><a href="http://couchdb.apache.org/">http://couchdb.apache.org/</a></li>
 	<li><a href="http://books.couchdb.org/relax/">CouchDB: The definitive guide</a> (Livre O'Reilly complet)</li>
 	<li>CouchDB to the Edge : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">slides</a>, 
 		vidéos <a href="http://jsconf.us/2009/couch_video.html">JsConf.us 2009</a> &amp;
 		<a href="http://jsconf.eu/2009/video_writing_apps_on_the_edge.html">JsConf.eu 2009</a></li>
 	<li><a href="http://twitter.com/couchdb">@couchdb à suivre sur twitter</a></li>
+	<li><a href="http://planet.couchdb.org">Planet CouchDB</a></li>
 	<li><a href="http://www.couchdb-fr.net/">http://www.couchdb-fr.net/</a> (User group Français)</li>
+	<li><a href="http://rsstodolist.appspot.com/?n=couchdb">http://rsstodolist.appspot.com/?n=couchdb</a></li>
 	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></li>
 </ul>
 </div>
