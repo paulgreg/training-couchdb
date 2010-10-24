@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> 
+<title>Introduction à CouchDB</title> 
+<!-- metadata --> 
+<meta name="generator" content="S5" /> 
+<meta name="version" content="1.0" /> 
+<meta name="author" content="Grégory PAUL" /> 
+<!-- configuration parameters --> 
+<meta name="defaultView" content="slideshow" /> 
+<meta name="controlVis" content="hidden" /> 
+<link rel="shortcut icon" type="image/ico" href="pix/favicon.ico"/> 
+<!-- style sheet links --> 
+ 
+<link rel="stylesheet" href="ui/default/slides.css" type="text/css" media="projection" id="slideProj" /> 
+<link rel="stylesheet" href="ui/default/outline.css" type="text/css" media="screen" id="outlineStyle" /> 
+<link rel="stylesheet" href="ui/default/print.css" type="text/css" media="print" id="slidePrint" /> 
+<link rel="stylesheet" href="ui/default/opera.css" type="text/css" media="projection" id="operaFix" /> 
+<!-- embedded styles --> 
+<style type="text/css" media="all"> 
+body {background: url(pix/logo.png) 0.25em 0.25em no-repeat; background-color: white; font-family: sans-serif; }
+div#header { width: 100%; background: url(pix/logo.png) 0.25em 0.25em no-repeat; }
+img#logo-vt { position: absolute; top: 0.5em; right: 0.5em; border: 0; }
+.slide h1 {background:transparent; left: 2.5em; color: #660F14;}
+div#footer {background: #E9ECEC;  color: #5A5F60;}
+.slide ul { margin-left: 0; margin-right: 0; }
+ul li { list-style-type: square; padding-left: 0.25em; }
+ul li ol li { list-style-type: decimal; }
+hr { border: 1px solid #553333; }
+a {color: #B81117 !important; border-bottom: 1px solid #B81117; }
+#w3, #w3 img { float: right; border: 0; }
+.javascript { color: #553333; font-size: 0.6em; white-space: pre; font-family: monospace; border: 1px solid black; margin: 0.2em; padding: 0.5em; background-color: #FFFFEE; }
+.headers { font-size: x-small; color: #553333; font-size: 0.6em; white-space: pre; font-family: monospace; border: 1px solid black; margin: 0.2em; padding: 0.5em; background-color: #FFFFEE; }
+.center { text-align: center; }
+img { border: 1px solid black; }
+</style> 
+<!-- S5 JS --> 
+<script src="ui/default/slides.js" type="text/javascript"></script> 
+</head> 
+<body> 
+<div class="layout"> 
+<div id="controls"><!-- DO NOT EDIT --></div> 
+<div id="currentSlide"><!-- DO NOT EDIT --></div> 
+<div id="header"><img id="logo-vt" src="pix/valtech.gif" alt="logo Valtech" /></div> 
+ 
+<div id="footer"> 
+<h1>Introduction à CouchDB</h1> 
+<h2>2010</h2> 
+</div> 
+</div> 
+ 
+<div class="presentation"> 
+ 
+<div class="slide"> 
+<h1>Introduction à <a href="http://couchdb.apache.org/">CouchDB</a></h1> 
+<h2><a href="http://javascript.training.free.fr/intro-couchdb/">http://javascript.training.free.fr/intro-couchdb</a></h2> 
+<h3>par Grégory PAUL - <a href="http://twitter.com/paulgreg" title="Compte twitter">@paulgreg</a></h3> 
+ 
+<a id="w3" href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a> 
+</div> 
+ 
+ 
+<div class="slide"> 
+<h1>Apache CouchDB</h1> 
+<ul> 
+	<li>Base <a href="http://fr.wikipedia.org/wiki/NoSQL" title="définition du NoSQL sur Wikipedia">NoSQL</a> orientée document &rArr; sans schéma</li> 
+	<li>Comparable à <a href="http://www.mongodb.org/" title="Lien vers le site de MongoDB">MongoDB</a></li> 
+	<li>Mais embrasse le web :
+		<ul> 
+            <li>Protocole <acronym title="HyperText Transfert Protocol">HTTP</acronym></li> 
+			<li>Accès <a href="http://fr.wikipedia.org/wiki/Representational_State_Transfer" title="définition du REST sur Wikipedia"><acronym title="Representational State Transfer">REST</acronym></a> (uniquement)</li> 
+			<li>Stockage au format <a href="http://fr.wikipedia.org/wiki/Json" title="définition du JSON sur Wikipedia"><acronym title="JavaScript Object Notation">JSON</acronym></a></li> 
+			<li>Vues par <a href="http://fr.wikipedia.org/wiki/MapReduce" title="définition du Map/Reduce sur Wikipedia">Map/Reduce</a> (en JavaScript)</li> 
+		</ul>			
+	</li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Architecture</h1> 
+<img alt="schéma" src="pix/sketch.png" style="float: right;" /> 
+<ul> 
+	<li>Construit en Erlang</li> 
+	<li>Parallèle</li> 
+	<li>Distribué : réplication N-maître</li> 
+	<li>Extensible</li> 
+	<li>Implémentation "légères" : <a href="http://www.couch.io/android">Android</a>, iOS en cours, <a href="http://github.com/peterbraden/browsercouch/tree/seq">BrowserCouch</a>, <a href="http://github.com/janl/jscouch">JsCouch</a></li> 
+	<li>Support commercial par <a href="http://www.couchone.com/">CouchOne</a> et <a href="https://cloudant.com/">Cloudant</a></li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Exemples d'utilisation</h1> 
+<ul> 
+	<li><a href="http://damienkatz.net/2010/08/why_large_hadron_collider_scie.html"> 
+	Le module <acronym title="Compact Muon Solenoid">CMS</acronym> au sein du <acronym title="Large Hadron Collider">LHC</acronym> au <acronym title="European Council for Nuclear Research">CERN</acronym></a> (10 <a href="http://fr.wikipedia.org/wiki/Petabyte" title="Définition de pétabyte sur wikipedia">PB</a> de données par an)</li> 
+	<li><a href="https://wiki.ubuntu.com/DesktopTeam/Specs/Karmic/IntegratingWithUbuntuOne">Ubuntu</a> : 
+		<ul> 
+			<li>base par utilisateur avec les données et préférences d'applications (contacts, bookmarks, TomBoy, etc)</li> 
+			<li>synchronisation via <a href="https://one.ubuntu.com/">Ubuntu One</a></li> 
+		</ul> 
+	</li> 
+	<li>Palm WebOS : <a href="http://architects.dzone.com/articles/couchdb-making-it-okay-work">Making it Okay to Work Offline</a></li> 
+	<li><a href="https://mozillalabs.com/raindrop/">Mozilla Labs  Raindrop</a> : Agrégateur de messages (Gmail, Twitter, ...)</li> 
+	<li>Une idée intéressante : <a href="http://blog.fupps.com/2010/10/06/serving-dns-replies-from-a-couchdb-database-with-the-bind-name-server/">DNS en CouchDB</a></li> 
+	<li>Et des dizaines d'autres références : <a href="http://wiki.apache.org/couchdb/CouchDB_in_the_wild">CouchDB in the wild</a></li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Données</h1> 
+<div class="slidecontent"> 
+<h2>Objet JSON :</h2> 
+<div class="javascript">{
+   "_id": "3c64f8626e3cde009c110ac984e3d2fe",
+   <span class="incremental">"_rev": "1-0a81337cc29f445ebf7fddaa4014abc3",</span> 
+   "tags": [ "Amis" ],
+   "lastname": "DUPONT",
+   "firstname": "Emile",
+   "birthdate": "1978-01-13",
+   "contacts": [ 	
+		{ "type": "Portable", "value": "06 75 47 61 00" }, 
+  		{ "type": "email", "value": "dupont@herge.fr" }
+	],
+   "tags": ["amis","pro"],
+   "country": "France",
+   "town": "Paris"<span class="incremental">,
+   "_attachments": {
+      "photo.jpg": { "content_type": "image/jpeg", "length": 1276983, "stub": true }
+   }</span> 
+}</div> 
+</div> 
+</div> 
+<div class="handout"> 
+<ul>    
+	<li>Peut contenir des attachements binaires (fichiers)</li> 
+	<li>Notion de révisions (et donc de conflits)</li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Accès <acronym title="Representational State Transfer">REST</acronym></h1> 
+<ul> 
+	<li><strong>C</strong>reate &rarr; PUT /myDb/3c64f82fe</li> 
+	<li><strong>R</strong>ead &rarr; GET /myDb/3c64f82fe</li> 
+	<li><strong>U</strong>pdate &rarr; POST /myDb/3c64f82fe?rev=2-1568290e8</li> 
+	<li><strong>D</strong>elete &rarr; DELETE /myDb/3c64f82fe?rev=2-1568290e8</li> 
+	<li><span class="incremental">et même <a href="http://www.webdav.org/specs/rfc2518.html%23METHOD_COPY">COPY</a></span></li> 
+</ul> 
+<ul> 
+	<li><span class="incremental">HTTP+REST &rArr; (reverse) proxy, monitoring (<a href="http://www.ntop.org/overview.html">ntop</a>, <a href="http://www.nagios.org/">nagios</a>), mécanisme de cache (<a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a>), ...</span></li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Démo : CouchDB, premiers pas</h1> 
+<div class="javascript">curl http://127.0.0.1:5984/
+{"couchdb":"Welcome","version":"0.10.1"}
+ 
+curl -X GET http://127.0.0.1:5984/_all_dbs
+[]
+ 
+curl -X PUT http://127.0.0.1:5984/db
+{"ok":true}
+ 
+curl -X GET http://127.0.0.1:5984/_all_dbs
+[db]
+ 
+curl -X DELETE http://127.0.0.1:5984/db
+{"ok":true}</div> 
+</div> 
+ 
+<div class="slide center"> 
+<h1>Avec Futon</h1> 
+<a href="http://127.0.0.1:5984/_utils/">http://127.0.0.1:5984/_utils/</a><br/><br/> 
+<img alt="futon" src="pix/futon.png" style="width: 95%;" /> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Démo : import de données</h1> 
+<p>MySQL to CouchDB, <acronym title="Structured Query Language">SQL</acronym> to <acronym title="Representational State Transfer">REST</acronym></p> 
+<ul> 
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=private/importFromGContact.php;h=cbe872dc706c4f40e9aed4f85481a5ad381818f4;hb=HEAD">importFromGContact.php</a></li> 
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=blob;f=code/server/couchDbRequestor.php;h=44aa6895ffe7ebde677286b3f7c5a7056ae6f969;hb=HEAD">CouchDBRequestor.php</a></li> 
+	<li>CouchDB : 1 base par utilisateur</li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Vues</h1> 
+<ul> 
+<li>des documents, comme les données, mais stockés sous /_design/, donc des &quot;designDocuments&quot;,</li> 
+<li>définis par une fonction <strong><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">map</a></strong> (résultats stockés dans un <a href="http://en.wikipedia.org/wiki/B%2B_tree">B+ Tree</a>), éventuellement définis par une fonction <strong><a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">reduce</a></strong>.</li> 
+</ul>
+<p class="center">
+	<img src="pix/mapReduceOverview.png" alt="map reduce schema" style="width: 80%;" /><br />
+	<a href="http://blog.jteam.nl/2009/08/04/introduction-to-hadoop/">From blog.jteam.nl</a>
+</p>
+</div> 
+ 
+<div class="slide"> 
+<h1>Démo : tous les contacts</h1> 
+<h2><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">Map</a></h2> 
+<div class="javascript">function(doc) {
+   if (doc.firstname)
+     emit(doc.firstname, doc);
+}</div> 
+<div class="javascript">function(doc) {
+	emit([doc.lastname, doc.firstname], doc);
+}</div> 
+<ul> 
+<li>Accès par <code>key</code>:<a href="http://localhost:5984/paulgreg/_design/person/_view/allPersons?key=[%22Z%22,%22Janice%22]">_design/person/_view/allPersons?key=["Z","Janice"]</a></li> 
+<li>ou par <code>startKey</code>/<code>endKey</code>:<a href="http://localhost:5984/paulgreg/_design/person/_view/allPersons?startkey=[%22X%22,%22A%22]&amp;endkey=[%22Z%22,%22Z%22]">allPersons?startkey=["X","A"]&amp;endkey=["Z","Z"]</a></li> 
+</ul> 
+</div> 
+ 
+<div class="slide">
+<h1>Démo : nuage de tags</h1> 
+<h2><a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)">Map</a></h2> 
+<div class="javascript">function(doc) {
+ if(doc.tags &amp;&amp; doc.tags.length > 0) {
+  var tags = doc.tags.split(/[  ]/g);
+  for(var idx in tags)
+    emit(tags[idx], 1); 
+  }
+}</div> 
+<h2><a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">Reduce</a></h2> 
+<div class="javascript">function(keys, values) {
+ var sum=0;
+ for(var i=0; i &lt; values.length; i++)
+  sum += values[i];
+ return sum;
+} // ou sum(values) ou _count
+</div>
+</div>
+
+<div class="slide"> 
+<h1>Un exemple : <a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></h1> 
+<div class="center" style="width 100%; height: 100%;"> 
+	<object type="image/svg+xml" data="pix/CouchDB-exemple.svg" style="border: 1px solid black; width: 98%; min-height: 300px;"></object> 
+</div> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Réplication</h1> 
+<h2>Réplication "one-shot"</h2> 
+<div class="javascript">POST /_replicate HTTP/1.1
+{
+ "source":"example-database",
+ "target":"http://example.org/example-database"
+}</div> 
+<h2>Réplication continue</h2> 
+<div class="javascript">POST /_replicate HTTP/1.1
+{
+ "source":"example-database",
+ "target":"http://example.org/example-database",
+ <strong>"continuous":true</strong> 
+}</div> 
+</div> 
+ 
+<div class="slide"> 
+<h1>CouchApps</h1> 
+<div class="headers"><a href=" http://glitterbacon.couchone.com/couchappspora/_design/couchappspora/index.html"> http://glitterbacon.couchone.com/couchappspora/_design/couchappspora/index.html</a> 
+ 
+GET /couchappspora/_design/couchappspora/index.html HTTP/1.1
+Host: couchone.com
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+[...]
+ 
+HTTP/1.1 200 OK
+Date: Thu, 06 May 2010 20:12:22 GMT
+<strong>Server: CouchDB/0.10.0 (Erlang OTP/R13B)</strong> 
+Connection: close
+[...]
+</div> 
+<ul> 
+	<li><a href="http://books.couchdb.org/relax/example-app/standalone-applications#In%20the%20Wild">Autres</a> <a href="http://couchapp.org/page/list-of-couchapps">exemples...</a></li>
+	<li><a href="http://github.com/couchapp/couchapp">CouchApp</a></li>
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>De nouvelles approches</h1> 
+<ul> 
+	<li>CouchDB, parfait pour le Web</li>
+	<li>Le site le plus rapide est toujours http://localhost</li>
+	<li>http://localhost &rArr; utilisation offline</li> 
+	<li>CouchApps = JSON data + map/reduce + HTML/CSS/JS</li> 
+	<li>Bases n-maîtres répliquées entre client et serveur ou même entre clients</li>
+	<li>Notion de &quot;p2p web&quot; : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">CouchDB to the Edge</a>, <a href="http://www.parleys.com/#st=5&amp;id=1867">CouchDB on the web</a></li> 
+</ul> 
+</div> 
+ 
+<div class="slide"> 
+<h1>Ressources</h1> 
+<ul> 
+	<li><a href="http://couchdb.apache.org/">http://couchdb.apache.org/</a></li> 
+	<li><a href="http://books.couchdb.org/relax/">CouchDB: The definitive guide</a> (Livre O'Reilly complet)</li> 
+	<li>CouchDB to the Edge : <a href="http://books.couchdb.org/CouchDB-Edge-EU.pdf">slides</a>, 
+		vidéos <a href="http://jsconf.us/2009/couch_video.html">JsConf.us 2009</a> &amp;
+		<a href="http://jsconf.eu/2009/video_writing_apps_on_the_edge.html">JsConf.eu 2009</a></li> 
+	<li><a href="http://twitter.com/couchdb">@couchdb à suivre sur twitter</a></li> 
+	<li><a href="http://planet.couchdb.org">Planet CouchDB</a></li> 
+	<li><a href="http://rsstodolist.appspot.com/?n=couchdb&amp;l=50">http://rsstodolist.appspot.com/?n=couchdb</a></li> 
+	<li><a href="http://gcontact.git.sourceforge.net/git/gitweb.cgi?p=gcontact/gcontact;a=tree">GContact2</a></li> 
+</ul> 
+</div> 
+ 
+</div> 
+ 
+</body> 
+</html> 
